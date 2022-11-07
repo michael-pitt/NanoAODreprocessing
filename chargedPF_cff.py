@@ -1,0 +1,30 @@
+import FWCore.ParameterSet.Config as cms
+from PhysicsTools.NanoAOD.common_cff import *
+from PhysicsTools.NanoAOD.nano_eras_cff import *
+
+packedPFCandidatesUpdated = cms.EDProducer("IsMatchedToHSProducer",
+    packedPFCandidates1 = cms.InputTag("packedPFCandidates"),
+    packedGenParticles1 = cms.InputTag("packedGenParticles"),
+)
+
+
+chargedPFTable = cms.EDProducer("SimpleCandidateFlatTableProducer",
+    src = cms.InputTag("packedPFCandidates"),
+    cut = cms.string("charge!=0"), 
+    name = cms.string("ChargedPFCandidates"),
+    doc  = cms.string("packedPFCandidates after basic selection"),
+    singleton = cms.bool(False), # the number of entries is variable
+    extension = cms.bool(False), # this is the main table for the tracks
+    variables = cms.PSet(CandVars,
+        lostInnerHits   = Var("lostInnerHits()", int, doc = "lostInnerHits"),
+	trackHighPurity = Var("trackHighPurity()", bool, doc = "trackHighPurity"),
+        fromPV   = Var("fromPV()", int, doc = "fromPV"),
+        dz   = Var("dz()", float, doc = "dz", precision=14),
+        dxy   = Var("dxy()", float, doc = "dxy", precision=14),
+        ),
+    externalVariables = cms.PSet(
+         isMatchedToGenHS = ExtVar("packedPFCandidatesUpdated:isMatchedToGen",bool,doc="if"),
+    ),
+)
+
+chargedPFTables = cms.Sequence(packedPFCandidatesUpdated + chargedPFTable)

@@ -4,7 +4,7 @@ from PhysicsTools.NanoAOD.nano_eras_cff import *
 
 losttracksTable = cms.EDProducer("SimpleCandidateFlatTableProducer",
     src = cms.InputTag("lostTracks"),
-    cut = cms.string("charge!=0"), 
+    cut = cms.string("charge!=0 && pt>0.5"), 
     name = cms.string("LostTracks"),
     doc  = cms.string("lost tracks"),
     singleton = cms.bool(False), # the number of entries is variable
@@ -13,8 +13,8 @@ losttracksTable = cms.EDProducer("SimpleCandidateFlatTableProducer",
         lostInnerHits   = Var("lostInnerHits()", int, doc = "lostInnerHits"),
 	trackHighPurity = Var("trackHighPurity()", bool, doc = "trackHighPurity"),
         fromPV   = Var("fromPV()", int, doc = "fromPV"),
-        dz   = Var("dz()", float, doc = "dz", precision=14),
-        dxy   = Var("dxy()", float, doc = "dxy", precision=14),
+        dz   = Var("dz()", float, doc = "dz", precision=10),
+        dxy   = Var("dxy()", float, doc = "dxy", precision=10),
         ),
     #externalVariables = cms.PSet(
     #    mvaTTH = ExtVar(cms.InputTag("muonMVATTH"),float, doc="TTH MVA lepton ID score",precision=14),

@@ -120,7 +120,9 @@ nanoSequenceCommon = cms.Sequence(
 	+ electronTables 
 	#+ lowPtElectronTables 
 	+ photonTables   
-	+ globalTables +vertexTables+ metTables+simpleCleanerTable 
+	+ globalTables +vertexTables
+	+ metTables
+	+ simpleCleanerTable 
 	#+ isoTrackTables 
 	+ losttracksTables
 	+ chargedPFTables

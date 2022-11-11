@@ -1,32 +1,11 @@
-// -*- C++ -*-
-//
-// Package:    PhysicsTools/NanoAOD
-// Class:      IsMatchedToHSProducer
-//
-/**\class IsMatchedToHSProducer IsMatchedToHSProducer.cc PhysicsTools/NanoAOD/plugins/IsMatchedToHSProducer.cc
-
- Description: [one line class summary]
-
- Implementation:
-     [Notes on implementation]
-*/
-//
-// Original Author:  Maria Giulia Ratti (ETHZ) [mratti]
-//         Created:  Thu, 22 Nov 2018 12:34:48 GMT
-//
-//
-
-
 // system include files
 #include <memory>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/global/EDProducer.h"
-
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
-
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Utilities/interface/StreamID.h"
 
@@ -91,24 +70,26 @@ void IsMatchedToHSProducer::produce(edm::StreamID streamID, edm::Event& iEvent, 
    unsigned int Nit = pc_handle->size();
    std::vector<bool> v_isMatchedToGen(Nit,false);
 
-   unsigned int iit=0;
-   for (auto iter_pf = pc_handle->begin(); iter_pf != pc_handle->end(); iter_pf++) {
-     auto const& pc = *iter_pf;
-     bool isMatchedToGen=false;
-     if (pc.charge()!=0){
-       TLorentzVector recotk;
-       recotk.SetPtEtaPhiM(pc.pt(),pc.eta(),pc.phi(),0);
-       for (unsigned int j = 0; j<gp_handle->size(); ++j){
-	  pat::PackedGenParticle const& pk = gp_handle->at(j);
-	  TLorentzVector genp;
-	  genp.SetPtEtaPhiM(pk.pt(),pk.eta(),pk.phi(),0);
-	  if (recotk.DeltaR(genp)<0.1 and (fabs(recotk.Pt()-genp.Pt())/recotk.Pt())<0.5){
-	     isMatchedToGen=true;
-	  }
-       }
-     }
-     v_isMatchedToGen[iit] = isMatchedToGen;
-     ++iit;
+   if (gp_handle.isValid()){
+      unsigned int iit=0;
+      for (auto iter_pf = pc_handle->begin(); iter_pf != pc_handle->end(); iter_pf++) {
+        auto const& pc = *iter_pf;
+        bool isMatchedToGen=false;
+        if (pc.charge()!=0){
+          TLorentzVector recotk;
+          recotk.SetPtEtaPhiM(pc.pt(),pc.eta(),pc.phi(),0);
+          for (unsigned int j = 0; j<gp_handle->size(); ++j){
+             pat::PackedGenParticle const& pk = gp_handle->at(j);
+             TLorentzVector genp;
+             genp.SetPtEtaPhiM(pk.pt(),pk.eta(),pk.phi(),0);
+             if (recotk.DeltaR(genp)<0.1 and (fabs(recotk.Pt()-genp.Pt())/recotk.Pt())<0.5){
+                isMatchedToGen=true;
+             }
+          }
+        }
+        v_isMatchedToGen[iit] = isMatchedToGen;
+        ++iit;
+      }
    }
 
    std::unique_ptr<edm::ValueMap<bool>> vm_isMatchedToGen(new edm::ValueMap<bool>());

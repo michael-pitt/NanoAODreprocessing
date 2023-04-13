@@ -22,7 +22,9 @@ cp NanoAODreprocessing/nano_cff.py.py PhysicsTools/NanoAOD/python/.
 cp NanoAODreprocessing/DiTauFilter.cc PhysicsTools/NanoAOD/plugins/.
 cp NanoAODreprocessing/IsMatchedToHSProducer.cc PhysicsTools/NanoAOD/plugins/.
 cp NanoAODreprocessing/VertexTableProducer.cc PhysicsTools/NanoAOD/plugins/.
-cp NanoAODreprocessing/run_crab.py .
+cp NanoAODreprocessing/ReweightingProducer.cc PhysicsTools/NanoAOD/plugins/.
+cp -r NanoAODreprocessing/submit_2018 .
+cp -r NanoAODreprocessing/submit_2017 .
 rm -rf NanoAODreprocessing
 scram b -j 8
 ```
@@ -31,5 +33,6 @@ scram b -j 8
 
 For MC:
 ```
-cmsRun run_crab.py
+cp submit_2018/*.py .
+cmsRun run_crab_mc.py
 ```

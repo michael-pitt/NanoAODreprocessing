@@ -13,8 +13,8 @@ config.JobType.maxMemoryMB = 4000
 #config.JobType.numCores = 8
 
 config.Data.inputDataset = "/EGamma/Run2018D-UL2018_MiniAODv2-v2/MINIAOD" 
-config.Data.outLFNDirBase = "/store/user/ccaillol/reNanoAOD/"
-config.Data.outputDatasetTag = "RunIISummer20UL18_NanoAODv9"
+config.Data.outLFNDirBase = "/store/group/cmst3/group/taug2/reNanoAOD/"
+config.Data.outputDatasetTag = "EGamma_Run2018D-RunIISummer20UL18_NanoAODv9"
 config.Data.inputDBS = "global"
 config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 10

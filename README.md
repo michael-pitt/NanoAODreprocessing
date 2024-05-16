@@ -15,10 +15,10 @@ scram b -j 8
 ```
 git clone https://github.com/cecilecaillol/NanoAODreprocessing.git
 cp NanoAODreprocessing/chargedPF_cff.py PhysicsTools/NanoAOD/python/.
-cp NanoAODreprocessing/losttracks_cff.py.py PhysicsTools/NanoAOD/python/.
-cp NanoAODreprocessing/vertices_cff.py.py PhysicsTools/NanoAOD/python/.
-cp NanoAODreprocessing/taus_cff.py.py PhysicsTools/NanoAOD/python/.
-cp NanoAODreprocessing/nano_cff.py.py PhysicsTools/NanoAOD/python/.
+cp NanoAODreprocessing/losttracks_cff.py PhysicsTools/NanoAOD/python/.
+cp NanoAODreprocessing/vertices_cff.py PhysicsTools/NanoAOD/python/.
+cp NanoAODreprocessing/taus_cff.py PhysicsTools/NanoAOD/python/.
+cp NanoAODreprocessing/nano_cff.py PhysicsTools/NanoAOD/python/.
 cp NanoAODreprocessing/DiTauFilter.cc PhysicsTools/NanoAOD/plugins/.
 cp NanoAODreprocessing/IsMatchedToHSProducer.cc PhysicsTools/NanoAOD/plugins/.
 cp NanoAODreprocessing/VertexTableProducer.cc PhysicsTools/NanoAOD/plugins/.
